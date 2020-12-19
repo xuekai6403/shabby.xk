@@ -1,0 +1,49 @@
+I"�
+<p><img src="http://starry99.github.io/catbook/img/nissa.jpg" alt="Image" />
+Core Graphics是一套基于C的API,.这也就意味着Core Graphics不是面向对象的。<br />
+Quartz 2D 是Core Graphics中的2D 绘制呈现引擎.<br />
+Quartz 2D能够与所有的图形和动画技术（如Core Animation, OpenGL ES, 和 UIKit 等）一起使用。<br />
+Quartz 2D在UIKit中也有很好的封装和集成，我们日常开发时所用到的UIKit中的组件都是由Core Graphics进行绘制的。不仅如此，当我们引入UIKit框架时系统会自动引入Core Graphics框<br />并且为了方便开发者使用在UIKit内部还对一些常用的绘图API进行了封装。<br /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (void)drawRect:(CGRect)rect {
+    
+    CGContextRef contect = UIGraphicsGetCurrentContext();
+    /*-----------1.文字----------------*/
+    [@"HelloWorld" drawInRect:CGRectMake(0, 0, rect.size.width, 20) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:13]}];
+    /*-----------2.直线----------------*/
+    //指定直线样式
+    CGContextSetLineCap(contect, kCGLineCapSquare);
+    //直线宽度
+    CGContextSetLineWidth(contect, 2);
+    //设置颜色
+    CGContextSetRGBStrokeColor(contect, 0, 1, 0, 1);
+    CGContextBeginPath(contect);
+    CGContextMoveToPoint(contect, rect.size.width/2, 0);
+    CGContextAddLineToPoint(contect, rect.size.width, rect.size.height/2);
+    CGContextAddLineToPoint(contect, rect.size.width/2, rect.size.height);
+    CGContextAddLineToPoint(contect, 0, rect.size.height/2);
+    CGContextAddLineToPoint(contect, rect.size.width/2, 0);
+    CGContextStrokePath(contect);
+    /*-----------3.矩形----------------*/
+    //创建路径并获取句柄
+    CGMutablePathRef path = CGPathCreateMutable();
+    //指定矩形
+    CGRect rectangle = CGRectMake(rect.size.width/4, rect.size.height/4,rect.size.width/2, rect.size.height/2);
+    //将矩形添加到路径中
+    CGPathAddRect(path,NULL, rectangle);
+    //将路径添加到上下文
+    CGContextAddPath(contect, path);
+    //设置矩形填充色
+    [[UIColor colorWithRed:0.20f green:0.60f blue:0.80f alpha:1.0f] setFill];
+    //矩形边框颜色
+    [[UIColor clearColor] setStroke];
+    //边框宽度
+    //绘制
+    CGContextDrawPath(contect, kCGPathFillStroke);
+    /*-----------4.圆----------------*/
+    CGContextSetRGBStrokeColor(contect,0.5,0.5,0.5,1.0);//画笔线的颜色
+    CGContextSetLineWidth(contect, 1.5);//线的宽度
+    CGContextAddArc(contect, rect.size.width/2, rect.size.height/2, rect.size.width/7, 0, M_PI*2, 1);
+    CGContextDrawPath(contect, kCGPathStroke);
+}
+</code></pre></div></div>
+:ET

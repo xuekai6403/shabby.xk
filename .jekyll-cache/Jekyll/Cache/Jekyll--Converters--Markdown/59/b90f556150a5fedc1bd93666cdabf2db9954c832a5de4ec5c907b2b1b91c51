@@ -1,0 +1,42 @@
+I"a<p><img src="http://starry99.github.io/catbook/img/android2.jpg" alt="" /></p>
+<h3 id="1textview">1.TextView</h3>
+
+<p>TextView是常用控件，主要用来显示文本。</p>
+
+<p>常用属性：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>textColor 文字颜色
+textSize 文字大小
+textStyle 字体样式
+gravity 字体显示位置
+width 宽度
+singleLine 是否单行显示
+maxLines 最多行数
+ellipsize 文本超过行宽显示方式
+drawableRight 组件中插入图片
+autoLink 设置链接
+</code></pre></div></div>
+
+<h3 id="2edittext">2.EditText</h3>
+
+<p>继承自TextView</p>
+
+<p>常用属性</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>password 密文显示
+numeric 只能输入文字
+maxLength 最长长度
+editable 是否可编辑
+selectAllOnFocus 默认全部选中获得焦点
+</code></pre></div></div>
+
+<h3 id="3交互之王-button">3.交互之王 Button</h3>
+
+<p>继承自TextView</p>
+
+<h3 id="4单选和多选按钮">4.单选和多选按钮</h3>
+
+<p>可以看出CheckBox和RadioButton同样都是CompoundButton抽象类的子类.
+其中CheckBox一般用于多选的情形，RadioButton一般用于单选的情形。注意，若想要RadioButton实现单选功能，必须用一个RadionGroup标签包裹所有的RadioButton。</p>
+
+:ET

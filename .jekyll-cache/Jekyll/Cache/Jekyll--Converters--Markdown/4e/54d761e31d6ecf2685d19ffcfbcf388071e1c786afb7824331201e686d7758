@@ -1,0 +1,12 @@
+I"&<p>Runtime</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>类对象(objc_class)
+实例(objc_object)
+元类(Meta Class)
+Method(objc_method)
+SEL(objc_selector)
+IMP
+类缓存(objc_cache)
+Category(objc_category)
+</code></pre></div></div>
+:ET

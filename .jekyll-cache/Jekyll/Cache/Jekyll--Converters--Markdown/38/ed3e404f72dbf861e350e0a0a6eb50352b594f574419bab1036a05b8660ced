@@ -1,0 +1,32 @@
+I"@<p><img src="http://starry99.github.io/catbook/img/IMG_3437.jpg" alt="Image" /></p>
+<h1 id="表示注释">表示注释</h1>
+
+<p>支持三种数据格式：
+1.对象（键值）
+animal : pet
+或
+：
+hash : {animal:pet}</p>
+
+<p>2.数组
+-cat
+-dog
+-goldfish
+表示[cat,dog,goldfish]
+或：</p>
+<ul>
+  <li>-cat
+  -dog
+  -goldfish
+表示[[cat,dog,goldfish]]</li>
+</ul>
+
+<p>3.纯量
+number: 12.30
+parent: ~ # ~表示null</p>
+
+<p>4.字符串
+str: 这是一行字符串
+如果字符串之中包含空格或特殊字符，需要放在引号之中。
+str: ‘内容： 字符串’</p>
+:ET

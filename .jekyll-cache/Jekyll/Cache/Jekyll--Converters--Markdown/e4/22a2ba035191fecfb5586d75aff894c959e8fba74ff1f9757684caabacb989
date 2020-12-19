@@ -1,0 +1,33 @@
+I"�<p><br />
+        写这篇文章的原因，来自于以上两篇文章的启发和触动，感谢有这么好的作者和这么棒的一群人这么快把官方文档翻译过来，让我们更快速的投入到Flutter的开发中，享受这一框架带给我们的乐趣。</p>
+<hr />
+
+<p><br /></p>
+<h3 id="what-is-fltter">What Is Fltter？</h3>
+<p><br />
+        Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质量的原生用户界面。 Flutter可以与现有的代码一起工作。在全世界，Flutter正在被越来越多的开发者和组织使用，并且Flutter是完全免费、开源的。
+<br /></p>
+<h3 id="fltterreact-nativeweexvue">Fltter、React-Native、Weex、Vue</h3>
+<p><br />
+        React-Native、Weex核心是通过Javascript开发，执行时需要Javascript解释器，UI是通过原生控件渲染。Flutter与用于构建移动应用程序的其它大多数框架不同，因为Flutter既不使用WebView，也不使用操作系统的原生控件。 相反，Flutter使用自己的高性能渲染引擎来绘制widget。Flutter使用C、C ++、Dart和Skia（2D渲染引擎）构建。在IOS上，Flutter引擎的C/C ++代码使用LLVM编译，任何Dart代码都是AOT编译为本地代码的，Flutter应用程序使用本机指令集运行（不涉及解释器）。而在Android下，Flutter引擎的C/C ++代码是用Android的NDK编译的，任何Dart代码都是AOT编译成本地代码的，Flutter应用程序依然使用本机指令集运行（不涉及解释器）。因此，Flutter能达到原生应用一样的性能。
+同时，Flutter提供了一组自己的widget），由Flutter的framework和引擎管理和渲染。您可以浏览Flutter widget的目录。之所以不适用原生控件，是因为Flutter希望最终结果是更高质量的，如果Flutter使用原生系统widget，Flutter应用的质量和性能将受到这些widget本身质量的限制。例如，在Android中，有一组硬编码的手势和固定的规则来对它们进行手势冲突消歧。在Flutter中，您可以编写自己的手势识别器，该手势识别器是手势系统中的一级参与者 。此外，由不同人撰写的两个小工具可协调手势冲突消歧。
+<br /></p>
+<h3 id="why-is-dart">Why Is Dart？</h3>
+<p><br />
+        Flutter在四个主要维度进行了评估，并考虑了框架作者、开发人员和最终用户的需求等因素。我们发现不同的语言在不同的层面符合一部分需求，但Dart在所有评估维度上得分都很高，并且符合我们的所有要求和标准。
+Dart运行时和编译器支持Flutter的两个关键特性的组合：基于JIT的快速开发周期：允许使用类型的语言进行形状更改和有状态的热重载；以及AOT编译器，可生成高效的ARM代码，可以快速启动并拥有可预测的生产部署性能。
+此外，我们有机会与Dart社区密切合作，Dart社区正在积极投入资源改进Dart在Flutter中的使用。例如，当我们采用Dart时，该语言没有提供生成原生二进制文件的工具链（这对于实现可预测的高性能是很有帮助的），但是现在实现了，因为Dart团队为Flutter构建了它。同样，Dart VM之前已经针对吞吐量进行了优化，但团队现在正在优化VM的延迟时间，这对于Flutter的工作负载更为重要。
+Dart在以下主要标准上得到高分：</p>
+
+<ul>
+  <li>开发人员的效率。Flutter的主要价值主张之一是通过让开发人员使用相同的代码库为iOS和Android创建应用程序，从而节省了工程资源。使用高效的语言可以进一步加速开发周期，并使Flutter更具吸引力。这对我们的framework团队和开发人员都非常重要。大部分Flutter功能都是用Dart实现，因此我们需要在10万行代码时能保持高效的而不会牺牲framework和widget的可读性。</li>
+  <li>面向对象。虽然我们可以使用非面向对象的语言，但这意味着要重新解决几个难题。另外，绝大多数开发人员都具有面向对象开发的经验，因此更容易学习如何使用Flutter进行开发。</li>
+  <li>可预测，高性能。借助Flutter，我们希望使开发人员能够快速创建流畅的用户体验。为了实现这一点，我们需要能够在每个动画帧中运行大量的代码。这意味着我们需要一种既能提供高性能又能提供可预测性能的语言，而不会出现会导致丢帧的周期性暂停。</li>
+  <li>快速内存分配。Flutter框架使用函数式流，它很大程度上依赖于底层的内存分配器，从而有效地处理小的、短期的内存分配会非常重要，所以在缺乏此功能的语言中Flutter无法有效地工作。
+<br /></li>
+</ul>
+
+<p><a href="https://juejin.im/post/5ad6b8db6fb9a028c42eb90a">Flutter教程（一）</a></p>
+
+<p><a href="https://flutterchina.club/get-started/editor/">Fltter中文网</a></p>
+:ET

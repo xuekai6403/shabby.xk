@@ -1,0 +1,187 @@
+I"�<p>我们来编写第一个shell程序：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash   #指定shell版本
+echo "Hello World !"   
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x ./test.sh  #使脚本具有执行权限
+./test.sh  #执行脚本
+</code></pre></div></div>
+
+<p>####1.变量(变量名和=之间不能有空格)</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>your_name="ZhangSan"
+
+echo $yourname
+echo ${yourname}
+</code></pre></div></div>
+
+<p>2.数组</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>array={"张三" "李四" "王五"}
+echo {$array[0]}
+</code></pre></div></div>
+
+<p>使用@可以访问所有元素</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>echo {$array[@]}
+</code></pre></div></div>
+
+<p>####2.test命令</p>
+
+<ul>
+  <li>-eq 等于则为真</li>
+  <li>-ne 不等于则为真</li>
+  <li>-gt 大于则为真</li>
+  <li>-ge 大于等于则为真</li>
+  <li>-lt 小于则为真</li>
+  <li>-le 小于等于则为真</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+num1=100
+num2=200
+if test $[num1] -eq $[num2]
+then
+    echo '两个数相等'
+else
+    echo '两个数不相等'
+
+</code></pre></div></div>
+
+<p>2.1文件测试</p>
+
+<ul>
+  <li>-e 文件存在则为真</li>
+  <li>-r 文件存在且可读为真</li>
+  <li>-w 文件存在且可写为真</li>
+  <li>-x 文件存在且可执行为真</li>
+  <li>-s 文件存在且至少有一个字符为真</li>
+  <li>-d 文件存在且为目录文件为真</li>
+  <li>-f 文件存在且为普通文件</li>
+  <li>-c 文件存在且为普通字符型文件</li>
+  <li>-b 文件存在且为块特殊文件</li>
+</ul>
+
+<p>2.2与(-a)或(-o)非(!)</p>
+
+<p>####3.函数</p>
+
+<p>定义格式：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[ function ] funname [()]
+
+{
+
+    action;
+
+    [return int;]
+
+}
+</code></pre></div></div>
+
+<p>带返回值的函数</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+funWithReturn(){
+    echo "这个函数会对输入的两个数字进行相加运算..."
+    echo "输入第一个数字: "
+    read aNum
+    echo "输入第二个数字: "
+    read anotherNum
+    echo "两个数字分别为 $aNum 和 $anotherNum !"
+    return $(($aNum+$anotherNum))
+}
+funWithReturn
+echo "输入的两个数字之和为 $? !"
+
+</code></pre></div></div>
+<p>*函数返回值在调用该函数后通过 $? 来获得</p>
+
+<p>####4.输入输出重定向</p>
+
+<ul>
+  <li>command &gt; file :将输出重定向到file</li>
+  <li>command &lt; file :将输入重定向到file</li>
+  <li>command » file :将输出以追加的方式重定向到 file</li>
+  <li>n &gt; file :将文件描述符为 n 的文件重定向到 file</li>
+  <li>n » file :将文件描述符为 n 的文件以追加的方式重定向到 file</li>
+  <li>n &gt;&amp; m :将输出文件 m 和 n 合并</li>
+  <li>n &lt;&amp; m :将输入文件 m 和 n 合并</li>
+  <li>« tag :将开始标记 tag 和结束标记 tag 之间的内容作为输入</li>
+</ul>
+
+<p>####5.文件包含</p>
+
+<p>文件 header.sh</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>url='http://www.baidu.com'
+</code></pre></div></div>
+
+<p>文件 test.sh</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>. ./header.sh
+echo '$url'
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#generating icon
+IconWithSize() {
+#-Z 等比例按照给定尺寸缩放最长边。
+sips -Z $1 Icon.png --out Icon/icon_$1x$1.png
+}
+#generating icon
+LaunchWithSize() {
+#iPhone 6Plus/6SPlus(Retina HD 5.5 @3x): 1125 x 2436
+#iPhone 6Plus/6SPlus(Retina HD 5.5 @3x): 1242 x 2208
+#iPhone 6/6S/(Retina HD 4.7 @2x): 750 x 1334
+#iPhone 5/5S(Retina 4 @2x): 640 x 1136
+#iPhone 4/4S(@2x): 640 x 960
+case $1 in
+"960")
+sips -z 960 640 LaunchImage.png --out LaunchImage/LaunchImage_4.png
+;;
+"1136")
+sips -z 1136 640 LaunchImage.png --out LaunchImage/LaunchImage_5.png
+;;
+"1334")
+sips -z 1334 750 LaunchImage.png --out LaunchImage/LaunchImage_6.png
+;;
+"2208")
+sips -z 2208 1242 LaunchImage.png --out LaunchImage/LaunchImage_6P.png
+;;
+"2436")
+sips -z 2436 1125 LaunchImage.png --out LaunchImage/LaunchImage_X.png
+;;
+esac
+}
+echo '**********请输入程序代码(xk)**********'
+echo '1 - 生成图标(名称必须是Icon.png)'
+echo '2 - 生成ios启动页(名称必须是LaunchImage.png)'
+read palamela
+sleep 0.5
+method="$palamela"
+if [ -n "$method" ]
+then
+if [ "$method" = "1" ]
+then
+rm -rf Icon
+mkdir Icon
+for size in  20 29 40 58 60 76 80 87 120 152 167 180 1024
+do
+IconWithSize $size
+done
+elif [ "$method" = "2"  ]
+then
+rm -rf LaunchImage
+mkdir LaunchImage
+for size in 960 1136 1334 2208 2436
+do
+LaunchWithSize $size
+done
+else
+echo '参数无效请重新输入'
+fi
+fi
+
+</code></pre></div></div>
+:ET

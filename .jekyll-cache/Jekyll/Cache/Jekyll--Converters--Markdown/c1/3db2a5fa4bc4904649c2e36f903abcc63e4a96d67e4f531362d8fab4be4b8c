@@ -1,0 +1,36 @@
+I"�<p><br />
+安卓设置应用启动页
+<br /></p>
+<h4 id="1新建splashactivity">1.新建SplashActivity</h4>
+<p><br /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        View decorView = getWindow().getDecorView();
+        int uiOptions =View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+        setContentView(R.layout.activity_splash);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                Intent intent = (Intent)new Intent(SplashActivity.this,MainActivity.class);
+                startActivity(intent);
+            }
+        }, 3000);
+    }
+</code></pre></div></div>
+<p><br /></p>
+<h4 id="2mainactivity设置禁止跳回">2.MainActivity设置禁止跳回</h4>
+<p><br /></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@Override
+    public void onBackPressed(){
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(intent);
+    }
+</code></pre></div></div>
+<p><br /></p>
+:ET

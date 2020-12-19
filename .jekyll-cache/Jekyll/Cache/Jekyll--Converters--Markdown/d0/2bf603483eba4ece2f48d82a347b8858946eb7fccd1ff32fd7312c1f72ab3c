@@ -1,0 +1,147 @@
+I"�<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+
+using namespace std;
+struct Book{
+    char *title;
+    char *author;
+    void display();
+};
+void Book::display(){
+    std::cout&lt;&lt;"书名:"&lt;&lt;title;
+    std::cout&lt;&lt;"作者:"&lt;&lt;author&lt;&lt;"\n";
+}
+class Book_Class{
+public:
+    char *title;
+    char *author;
+    void display();
+};
+void Book_Class::display(){
+    std::cout&lt;&lt;"书名:"&lt;&lt;title;
+    std::cout&lt;&lt;"作者:"&lt;&lt;author&lt;&lt;"\n";
+}
+class Person{
+public:
+    char *name;
+    char *age;
+};
+class CTO:Person{
+public:
+    char *company;
+    char *direction;
+};
+int main(int argc, const char * argv[]) {
+    //1.文件读取
+    std::fstream st;
+    st.open(filename);
+    char c;
+    while ((c=st.get()) != EOF) {
+        std::cout&lt;&lt;c;
+    }
+    st.close();
+//    2.Class和Struct区别
+    Book book;
+    book.title = (char*)"《C++ Primer》";
+    book.author = (char*)"ZhangSan";
+    book.display();
+
+    Book_Class bookc;
+    bookc.title = (char*)"《C++ Primer》";
+    bookc.author = (char*)"ZhangSan";
+    bookc.display();
+    char name;
+    std::cin&gt;&gt;name;
+    while (name!='e') {
+        std::cout&lt;&lt;"您输入的是"&lt;&lt;name;
+        std::cout&lt;&lt;"\n";
+        std::cin&gt;&gt;name;
+    }
+    //3.指针
+    int var1;
+    char var2[10];
+    cout&lt;&lt;"The Address of var1\n";
+    cout&lt;&lt;&amp;var1&lt;&lt;endl;
+
+    cout&lt;&lt;"The Address of var2\n";
+    cout&lt;&lt;&amp;var2&lt;&lt;endl;
+    //指针变量
+    int num = 20;
+    int *p;
+    p = &amp;num;
+    cout&lt;&lt;"num 的地址是:"&lt;&lt;&amp;num&lt;&lt;"值是:"&lt;&lt;num&lt;&lt;endl;
+    cout&lt;&lt;"p的值是:"&lt;&lt;p&lt;&lt;"内容是:"&lt;&lt;*p&lt;&lt;endl;
+    //4.引用
+    int a,b;
+    int&amp; c=a;
+    int&amp; d=b;
+    a=1;
+    b=2;
+    cout&lt;&lt;"a的值是:"&lt;&lt;a&lt;&lt;endl;
+    cout&lt;&lt;"a的引用值是:"&lt;&lt;c&lt;&lt;endl;
+    cout&lt;&lt;"b的值是:"&lt;&lt;b&lt;&lt;endl;
+    cout&lt;&lt;"b的引用值是:"&lt;&lt;d&lt;&lt;endl;
+    
+    //5.存储类型（存储类型定义了函数或者变量的作用范围或者生命周期）
+    //auto,register,static,extern,mutable
+    //auto是所有局部变量的默认存储类型
+    //register 寄存器存储类型，不能用寻址运算
+    //static意味着该变量会自始至终的存在程序的生命周期
+    //extern存储用于使全局类型变量的引用对所有程序文件可见
+    //mutable应用于类对象
+    
+    return 0;
+}
+
+/*------5月7日------*/
+//1.动态内存
+//C 语言中的 malloc() 函数在C++中仍然存在，但是建议避免使用 malloc() 函数。相对于 malloc() 函数 new 操作符的主要优势是 new 操作符不仅分配内存，它还可以构造对象，而这正是 C++ 的主要目的。
+double *doup = NULL;
+doup = new double;
+
+*doup = 3.1314520;
+cout&lt;&lt;"Address: "&lt;&lt;doup&lt;&lt;"\n"&lt;&lt;"Value: "&lt;&lt;*doup&lt;&lt;endl;
+delete doup;
+Box *myboxArray = new Box[4];
+delete [] myboxArray;
+
+//2.命名空间(从本质上讲，一个命名空间定义了一个范围。)
+first_Namespace::nslog();
+second_Namespace::nslog();
+
+//3.模板
+//3.1函数模板
+template &lt;class type&gt; ret-type func-name(parameter list)
+{
+// body of function
+}
+int a=1;
+int b=2;
+cout&lt;&lt;"Max(a,b)"&lt;&lt;Max(a,b)&lt;&lt;endl;
+
+double i=3.16;
+double j=9.8;
+cout&lt;&lt;"Max(i,j)"&lt;&lt;Max(i,j)&lt;&lt;endl;
+
+string x="Hello";
+string y="World";
+cout&lt;&lt;"Max(x,y)"&lt;&lt;Max(x,y)&lt;&lt;endl;
+
+//3.2类模板
+template &lt;class type&gt; class class-name {
+.
+.
+.
+}
+
+//4.预处理指令 #define,#include,#if,#else,#line
+//#define处理
+//#ifdef DEBUG
+//    cout&lt;&lt;"Not Define DEBUG"&lt;&lt;endl;
+//#endif
+cout &lt;&lt; "Value of __LINE__ : " &lt;&lt; __LINE__ &lt;&lt; endl;
+cout &lt;&lt; "Value of __FILE__ : " &lt;&lt; __FILE__ &lt;&lt; endl;
+cout &lt;&lt; "Value of __DATE__ : " &lt;&lt; __DATE__ &lt;&lt; endl;
+cout &lt;&lt; "Value of __TIME__ : " &lt;&lt; __TIME__ &lt;&lt; endl;
+
+</code></pre></div></div>
+:ET

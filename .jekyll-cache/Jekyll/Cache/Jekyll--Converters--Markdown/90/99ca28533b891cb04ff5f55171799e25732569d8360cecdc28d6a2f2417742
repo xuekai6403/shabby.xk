@@ -1,0 +1,102 @@
+I"�<p><img src="http://starry99.github.io/catbook/img/IMG_3542.jpg" alt="" /></p>
+
+<p><strong>1.objc最短的方法声明</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>返回值的- (TYPE)如果不写括号，编译器默认认为是- (id)类型:
+
+- init;
+- (id)init; // 等价于
+同理，参数如果不写类型默认也是id类型:
+
+- (void)foo:arg;
+- (void)foo:(id)arg; // 等价于
+还有，有多参数时方法名和参数提示语可以为空
+
+- (void):(id)arg1 :(id)arg2;
+- (void)foo:(id)arg1 bar:(id)arg2; // 省略前
+综上，最短的函数可以写成这样：
+
+- _;   // 没错，这是一个oc方法声明
+- :_;  // 这是一个带一个参数的oc方法声明
+// 等价于
+- (id)_;
+- (id) :(id)_;
+</code></pre></div></div>
+
+<p><strong>2.可变参数类型的block</strong></p>
+
+<p>一个block像下面一样声明：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>void(^block1)(void);
+void(^block2)(int a);
+void(^block3)(NSNumber *a, NSString *b);
+</code></pre></div></div>
+
+<p><strong>3.小括号内联复合表达式</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>self.backgroundView = ({
+    UIView *view = [[UIView alloc] initWithFrame:self.view.bounds];
+    view.backgroundColor = [UIColor redColor];
+    view.alpha = 0.8f;
+    view;
+});
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>self.result = ({
+    double result = 0;
+    for (int i = 0; i &lt;= M_2_PI; i+= M_PI_4) {
+        result += sin(i);
+    }
+    result;
+});
+</code></pre></div></div>
+
+<p><strong>4.预处理时计算可变参数个数（√）</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#define COUNT_PARMS2(_a1, _a2, _a3, _a4, _a5, RESULT, ...) RESULT
+#define COUNT_PARMS(...) COUNT_PARMS2(__VA_ARGS__, 5, 4, 3, 2, 1)
+int count = COUNT_PARMS(1,2,3); // 预处理时count==3
+</code></pre></div></div>
+
+<p><strong>5.预处理断言（√）</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>下面的断言在编译前就生效
+#define C_ASSERT(test) \
+    switch(0) {\
+          case 0:\
+          case test:;\
+    }
+如断言上面预处理时计算可变参数个数：
+
+C_ASSERT(COUNT_PARMS(1,2,3) == 2);
+如果断言失败，相当于switch-case中出现了两个case:0，则编译报错。
+</code></pre></div></div>
+
+<p><strong>6.带自动提示的keypath宏（√）</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>源自Reactive Cocoa中的宏：
+#define keypath2(OBJ, PATH) \
+    (((void)(NO &amp;&amp; ((void)OBJ.PATH, NO)), # PATH))
+</code></pre></div></div>
+<p>引申：[<介绍RAC宏的文章>](http://blog.sunnyxx.com/2014/03/06/rac_1_macros/)中曾经写过。这个宏在写PATH参数的同时是带自动提示的</介绍RAC宏的文章></p>
+
+<p><strong>7.逗号表达式</strong></p>
+
+<p>逗号表达式取后值，但前值的表达式参与运算，可用void忽略编译器警告</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>int a = ((void)(1+2), 2); // a == 2
+</code></pre></div></div>
+<p>于是上面的keypath宏的输出结果是#PATH也就是一个c字符串</p>
+
+<p><strong>8.逻辑最短路径（√）</strong></p>
+
+<p>之前的文章没有弄清上面宏中NO&amp;&amp;NO的含义，其实这用到了编译器优化的特性：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>if (NO &amp;&amp; [self shouldDo]/*不执行*/) {
+    // 不执行
+}
+</code></pre></div></div>
+<p>编译器知道在NO后且什么的结果都是NO，于是后面的语句被优化掉了。也就是说keypath宏中这个NO &amp;&amp; ((void)OBJ.PATH, NO)就使得在编译后后面的部分不出现在最后的代码中，于是乎既实现了keypath的自动提示功能，又保证编译后不执行多余的代码。</p>
+
+<p>文章摘自：<a href="http://blog.sunnyxx.com/2014/08/02/objc-weird-code/">«Objc非主流代码技巧»</a></p>
+:ET

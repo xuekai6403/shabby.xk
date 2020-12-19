@@ -1,0 +1,48 @@
+I"�
+<hr />
+<p>layout:     post
+title:     Qt环境(Mac)
+subtitle:
+date:       2018-05-03
+author:     XueKai
+header-img:
+catalog: true
+tags:
+—</p>
+
+<p><strong>1.简单概念</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GUI：图形用户界面
+STL：标准模板库
+
+java的GUI编程可以选择：AWT/Swing,SWT/Jface
+C++的GUI:wxWidget(原生风格),gtk++，Qt
+wxWidget:
+
+</code></pre></div></div>
+
+<p><strong>2.Mac下Qt环境的搭建</strong></p>
+
+<p>https://blog.csdn.net/pcsxk/article/details/70946188</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.下载Xcode
+2.下载QtCreate [传送门](http://download.qt.io/official_releases/qtcreator/)
+3.下载QtOpenSource [传送门](http://download.qt.io/official_releases/qt/)
+4.配置Qt版本
+5.构建套件
+
+</code></pre></div></div>
+
+<p><strong>3.编译系统</strong></p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+编译器架构：
+LLVM:
+
+编译器前端：
+GCC:
+Clang:Clang 的开发目标是提供一个可以替代 GCC 的前端编译器。与 GCC 相比，Clang 是一个重新设计的编译器前端，具有一系列优点，例如模块化，代码简单易懂，占用内存小以及容易扩展和重用等。由于 Clang 在设计上的优异性，使得 Clang 非常适合用于设计源代码级别的分析和转化工具。Clang 也已经被应用到一些重要的开发领域，如 Static Analysis 是一个基于 Clang 的静态代码分析工具。
+Clang 的开发背景 : 由于 GNU 编译器套装 (GCC) 系统庞大，而且 Apple 大量使用的 Objective-C 在 GCC 中优先级较低，同时 GCC 作为一个纯粹的编译系统，与 IDE 配合并不优秀，Apple 决定从零开始写 C family 的前端，也就是基于 LLVM 的 Clang 了。Clang 由 Apple 公司开发，源代码授权使用 BSD 的开源授权。
+
+</code></pre></div></div>
+:ET

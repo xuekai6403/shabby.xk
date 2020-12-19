@@ -1,0 +1,235 @@
+I"�+<p><img src="http://starry99.github.io/catbook/img/falali.jpg" alt="Image" /></p>
+<h3 id="1注释明晰">1.注释明晰</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/** 来疯直播Session */
+@property (nonatomic, strong) LFLiveSession *session;
+
+/** 覆盖层View */
+@property (weak, nonatomic) IBOutlet UIView *overlayView;
+
+/** 头像imageView */
+@property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
+
+/** 标题标签 */
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+
+/** 直播状态标签 */
+@property (weak, nonatomic) IBOutlet UILabel *liveStatusLabel;
+
+/** 开始直播按钮 */
+@property (weak, nonatomic) IBOutlet UIButton *startLiveBtn;
+
+/** 相机按钮 */
+@property (weak, nonatomic) IBOutlet UIButton *cameraBtn;
+
+/** 美颜按钮 */
+@property (weak, nonatomic) IBOutlet UIButton *beautyBtn;
+
+/** 我是灯泡 []~(￣▽￣)~* */
+@property (weak, nonatomic) IBOutlet UIButton *lightBtn;
+
+/** 灯泡状态,默认为关闭 */
+@property (nonatomic) AVCaptureTorchMode torchMode;
+
+/** 我是镜子 []~(￣▽￣)~* */
+@property (weak, nonatomic) IBOutlet UIButton *mirrorBtn;
+</code></pre></div></div>
+<h3 id="2多情况判断枚举">2.多情况判断枚举</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>typedef NS_ENUM(NSInteger, AVAuthorizationStatus) {
+	AVAuthorizationStatusNotDetermined = 0,
+	AVAuthorizationStatusRestricted,
+	AVAuthorizationStatusDenied,
+	AVAuthorizationStatusAuthorized
+} NS_AVAILABLE_IOS(7_0) __TVOS_PROHIBITED;
+
+switch (status) {
+        case AVAuthorizationStatusNotDetermined: {
+            // 许可对话没有出现，发起授权许可
+            [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                if (granted) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        @strongify(self);
+                        [self.session setRunning:YES];
+                    });
+                }
+            }];
+            break;
+        }
+        case AVAuthorizationStatusAuthorized: {
+            // 已经开启授权，可继续
+            dispatch_async(dispatch_get_main_queue(), ^{
+                @strongify(self);
+                [self.session setRunning:YES];
+            });
+            break;
+        }
+        case AVAuthorizationStatusDenied:
+        case AVAuthorizationStatusRestricted:
+            // 用户明确地拒绝授权，或者相机设备无法访问
+            
+            break;
+        default:
+            break;
+    }
+</code></pre></div></div>
+<h3 id="4自定义打印">4.自定义打印</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#define YPLog(FORMAT, ...) fprintf(stderr, "[%s:%d行] %s\n", [[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+</code></pre></div></div>
+<h3 id="5自定义常用语句和常用配置">5.自定义常用语句和常用配置</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#define YPNotificationCenter [NSNotificationCenter defaultCenter]
+#define YPUserDefaults [NSUserDefaults standardUserDefaults]
+#define YPApplication [UIApplication sharedApplication]
+#define YPFileManager [NSFileManager defaultManager]
+#define YPDevice [UIDevice currentDevice]
+/**
+*颜色
+*/
+#define YPBlackColor [UIColor blackColor]
+#define YPBlueColor [UIColor blueColor]
+#define YPRedColor [UIColor redColor]
+#define YPWhiteColor [UIColor whiteColor]
+/**
+*随机色和RGB
+*/
+/** RGB颜色 */
+#define YPColor_RGB(r, g, b) [UIColor colorWithRed:(r) / 255.0 green:(g) / 255.0 blue:(b) / 255.0 alpha:1.0]
+#define YPColor_RGBA(r, g, b, a) [UIColor colorWithRed:(r) / 255.0 green:(g) / 255.0 blue:(b) / 255.0 alpha:(a)]
+#define YPColor_RGBA_256(r, g, b, a) [UIColor colorWithRed:(r) / 255.0 green:(g) / 255.0 blue:(b) / 255.0 alpha:(a) / 255.0]
+/** 随机色 */
+#define YPRandomColor_RGB YPColor_RGB(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
+#define YPRandomColor_RGBA YPColor_RGBA_256(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
+</code></pre></div></div>
+<h3 id="6判断设备类型">6.判断设备类型</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#define iPHone6Plus ([UIScreen mainScreen].bounds.size.height == 736) ? YES : NO
+
+#define iPHone6 ([UIScreen mainScreen].bounds.size.height == 667) ? YES : NO
+
+#define iPHone5 ([UIScreen mainScreen].bounds.size.height == 568) ? YES : NO
+
+#define iPHone4 ([UIScreen mainScreen].bounds.size.height == 480) ? YES : NO
+</code></pre></div></div>
+<h3 id="7屏幕尺寸相关">7.屏幕尺寸相关</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/** 屏幕 */
+#define YPScreen [UIScreen mainScreen]
+/** 屏幕宽度 */
+#define YPScreenW [UIScreen mainScreen].bounds.size.width
+/** 屏幕高度 */
+#define YPScreenH [UIScreen mainScreen].bounds.size.height
+/** 屏幕bounds */
+#define YPScreenBounds [UIScreen mainScreen].bounds
+/** 屏幕伸缩度（Retina时值为2,非Retina值为1）*/
+#define YPScreenScale [UIScreen mainScreen].scale
+</code></pre></div></div>
+
+<h3 id="8系统其它高度设置">8.系统其它高度设置</h3>
+<hr />
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/** 系统状态栏高度 */
+UIKIT_EXTERN CGFloat const kAppStatusBarHeight;
+/** 系统导航栏高度 */
+UIKIT_EXTERN CGFloat const kAppNavigationBarHeight;
+/** 系统tabbar高度 */
+UIKIT_EXTERN CGFloat const kAppTabBarHeight;
+</code></pre></div></div>
+<h3 id="9善于使用layer">9.善于使用Layer</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// containerView
+    UIBezierPath *maskPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, YPScreenW, self.containerView.height) byRoundingCorners:UIRectCornerTopLeft | UIRectCornerTopRight cornerRadii:CGSizeMake(8, 8)];
+    CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+    maskLayer.frame = CGRectMake(0, 0, YPScreenW, self.containerView.height);
+    maskLayer.path = maskPath.CGPath;
+    self.containerView.layer.mask = maskLayer;
+</code></pre></div></div>
+<h3 id="10善于使用分类扩展方法">10.善于使用分类扩展方法</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> // 我要直播按钮
+    [[_phoneLiveBtn rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+        @strongify(self);
+        // 跳转到手机直播控制器
+        [self.navigationController pushViewController:[YPPhoneLiveViewController controller] animated:YES];
+    }];
+</code></pre></div></div>
+<h3 id="11拦截push事件">11.拦截push事件</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+ * 可以在这个方法中拦截所有push进来的控制器
+ */
+- (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated
+{
+    if (self.childViewControllers.count &gt; 0) { // 如果push进来的不是第一个控制器
+        
+        if ([viewController isKindOfClass:NSClassFromString(@"YPBilibiliWebViewController")]) {
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.titleLabel.font = [UIFont boldSystemFontOfSize:17];
+            button.contentEdgeInsets = UIEdgeInsetsMake(0, -10, 0, 0);
+            [button setTitle:@"返回" forState:UIControlStateNormal];
+            [button sizeToFit];
+            [button setTitleColor:YPMainColor forState:UIControlStateNormal];
+            [button setTitleColor:YPMainColor forState:UIControlStateHighlighted];
+            @weakify(self);
+            [[button rac_signalForControlEvents:UIControlEventTouchUpInside] subscribeNext:^(id x) {
+                @strongify(self);
+                [self popViewControllerAnimated:YES];
+            }];
+            
+            viewController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+        }
+        
+
+        // 隐藏tabbar
+        viewController.hidesBottomBarWhenPushed = YES;
+    }
+    
+    // 这句super的push要放在后面, 让viewController可以覆盖上面设置的leftBarButtonItem
+    [super pushViewController:viewController animated:animated];
+    
+}
+</code></pre></div></div>
+<h3 id="12善于封装方法">12.善于封装方法</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.delegate = self;
+    
+    self.tabBar.tintColor = YPMainColor;
+    
+    [self addChildVc:[YPHomeController controller] andTitle:@"首页" andImage:@"home_home_tab" andSelectedImage:@"home_home_tab_s"];
+    
+    [self addChildVc:[YPProfileViewController controller] andTitle:@"我的" andImage:@"home_mine_tab" andSelectedImage:@"home_mine_tab_s"];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+}
+
+
+#pragma mark - Private
+- (void)addChildVc:(UIViewController*)childVc andTitle:(NSString*)title andImage:(NSString*)image andSelectedImage:(NSString*)selectedImage
+{
+    childVc.tabBarItem.title = title;
+    
+    childVc.tabBarItem.image = [[UIImage imageNamed:image] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    childVc.tabBarItem.selectedImage = [[UIImage imageNamed:selectedImage] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    
+    YPNavigationController* nav = [[YPNavigationController alloc] initWithRootViewController:childVc];
+    [self addChildViewController:nav];
+}
+</code></pre></div></div>
+<h3 id="13善于封装viewdidload中的工作">13.善于封装ViewDidLoad中的工作</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    // UI
+    [self createUI];
+    
+    // Data
+    [self loadData];
+}
+</code></pre></div></div>
+<h3 id="14不避讳使用通知该用则用用则有良好封装">14.不避讳使用通知，该用则用.用则有良好封装</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[[YPNotificationCenter rac_addObserverForName:kCycleBannerWillBeginDraggingNotification object:nil] subscribeNext:^(id x) {
+        @strongify(self);
+        self.contentTableView.scrollEnabled = NO;
+    }];
+</code></pre></div></div>
+<h3 id="15将xib约束拉出来代码中灵活使用">15.将Xib约束拉出来，代码中灵活使用</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>_coverImageViewHeightCons.constant = height;
+[self layoutIfNeeded];
+</code></pre></div></div>
+:ET

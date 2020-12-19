@@ -1,0 +1,17 @@
+I"{<h4 id="1检测是否域名被封">1.检测是否域名被封</h4>
+
+<p><a href="http://tool.chinaz.com/port/">现在国内扫描一下端口是否被封-&gt;</a></p>
+
+<p><a href="https://www.yougetsignal.com/tools/open-ports/">再去国外扫描一下-&gt;</a></p>
+
+<p>如果【国内测试是关闭了】但是【国外是正常打开的】，那你的ip的确是被封了</p>
+
+<h4 id="2搬瓦工申请更换ip">2.搬瓦工申请更换Ip</h4>
+
+<p><a href="https://kiwivm.64clouds.com/main-exec.php?mode=blacklistcheck">搬瓦工自己有工具测试是否是Ip被封-&gt;</a>
+界面如下：
+<img src="http://starry99.github.io/catbook/img/bwg.png" alt="Image" /></p>
+
+<p>如果没有被封，底下会有一个绿色的”IP NOT BLOCKED”
+如果被封了，地下会有一个红色的”IP BLOCKED”（大概是这样），继续点击申请更换IP，按步骤执行就可以了。</p>
+:ET

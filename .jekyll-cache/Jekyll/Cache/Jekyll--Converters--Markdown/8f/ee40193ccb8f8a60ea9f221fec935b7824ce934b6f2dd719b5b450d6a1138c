@@ -1,0 +1,277 @@
+I"�3<p><img src="http://starry99.github.io/catbook/img/android_apps.jpg" alt="" /></p>
+
+<blockquote>
+  <p>ListView是安卓最经典的控件之一，相当于IOS的UITableView，使用率非常之高。虽然现在其江山地位不稳，将要被recyclerview取代，但设计理念是很经典的。</p>
+</blockquote>
+
+<p><strong>ListView主要三个要素</strong></p>
+
+<ul>
+  <li>ListView控件</li>
+  <li>适配器类，用到了设计模式中的适配器模式，它是视图和数据之间的桥梁，负责提供对数据的访问，生成每一个列表项对于的View。常用的适配器类有：ArrayAdapter，SimpleAdapter和SimpleCursorAdapter。</li>
+  <li>数据源，当然最重要最复杂的部分就是适配器类的编写和设计，在一些复杂的界面，常常需要对适配器类进行相关逻辑处理。</li>
+</ul>
+
+<h3 id="1arrayadapter适配器">1.ArrayAdapter适配器</h3>
+
+<p>布局文件：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"&gt;
+    &lt;ListView
+        android:id="@+id/lv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:divider="@android:color/holo_red_dark"
+        android:dividerHeight="3dp"
+        android:scrollbars="none"/&gt;
+&lt;/RelativeLayout&gt;
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class MainActivity extends Activity {
+    private ListView listView;
+    private String datas[]={ "Sunday", "Monday", "Tuesday", "Wednesday",
+            "Thursday", "Friday", "Saturday" };//准备数据源
+    ArrayAdapter&lt;String&gt; adapter;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题栏
+        setContentView(R.layout.activity_main);
+        listView=(ListView)findViewById(R.id.lv);
+        //实例化ArrayAdapter
+        adapter=new ArrayAdapter&lt;String&gt;(this,android.R.layout.simple_list_item_1,datas);
+        listView.setAdapter(adapter);//设置适配器
+    }
+}
+这里实例化ArrayAdapter对象传入了三个参数，第一个参数是上下文对象，第二个参数是子项布局，这里调用了系统内容的布局，第三个参数是数据集，这里传入的是字符串数组。最后调用setAdapter方法设置适配器。 
+</code></pre></div></div>
+
+<h3 id="2simpleadapter">2.SimpleAdapter</h3>
+
+<p>ArrayAdapter仅仅适用于显示信息比较单一的场景，若显示信息包含多种形式的数据，就不太适用了，就要考虑用SimpleAdapter,当存在多种数据结构的时候首先要考虑布局问题。因此首先要设置子项目布局文件。</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="match_parent"&gt;
+    &lt;ImageView
+        android:id="@+id/img"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="50dp"
+        android:layout_height="50dp" /&gt;
+    &lt;TextView
+        android:id="@+id/tv"
+        android:text="hello"
+        android:gravity="center"
+        android:layout_marginLeft="50dp"
+        android:textSize="28sp"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp" /&gt;
+&lt;/LinearLayout&gt;
+</code></pre></div></div>
+
+<p>以上样式包括两种控件，ImgeView和TextView，ImageView负责图片的显示，TextView对图片信息进行说明，采用线性布局的水平布局模式。 主布局文件如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"&gt;
+    &lt;ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" /&gt;
+&lt;/RelativeLayout&gt;
+</code></pre></div></div>
+
+<p>主布局文件中仅配置了一个ListView控件，设置其宽高都是占据整个布局（match_parent）。 MainActivity.java:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class MainActivity extends Activity {
+    private ListView listView;
+    private SimpleAdapter simpleAdapter;
+    private List&lt;Map&lt;String, Object&gt;&gt; datas=new ArrayList&lt;Map&lt;String, Object&gt;&gt;();
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        listView=(ListView)findViewById(R.id.listview);
+        initDatas();//初始化数据集
+//实例化SimpleAdapter
+        simpleAdapter=new SimpleAdapter(this,datas,R.layout.animal_layout,new String[]{"img","name"},new int[]{R.id.img,R.id.tv});        listView.setAdapter(simpleAdapter);//设置配置器
+    }
+    private void initDatas() {
+        Map map1=new HashMap();
+        map1.put("img",R.drawable.fish);
+        map1.put("name","小金鱼");
+        Map map2=new HashMap();
+        map2.put("img",R.drawable.horse);
+        map2.put("name","千里马");
+        Map map3=new HashMap();
+        map3.put("img",R.drawable.mouse);
+        map3.put("name","米老鼠");
+        datas.add(map1);
+        datas.add(map2);
+        datas.add(map3);
+    }
+}
+</code></pre></div></div>
+
+<p>SimpleAdapter的构造函数如下： SimpleAdapter(Context context, List&lt;? extends Map&lt;String, ?» data, int resource, String[] from, int[] to) 实例化SimpleAdapter时要传入几个参数：</p>
+<ul>
+  <li>context：即上下文对象，这里传入this；</li>
+  <li>data:是一个包裹Map集合的List数据集，这里传入datas，程序初始化的数据集；</li>
+  <li>resource：子项布局文件，这里是我们自定义的animal_layout.xml文件，传入R.layout.animal_layout；</li>
+  <li>from:是一个字符串数组，字符串指的是Map中的键值，这里有两个键，即“img”和“name”；</li>
+  <li>to:是一个int型数组，表示子项布局中对应控件的id，这里传入ImageView的id-R.id.img和TextView的id-R.id.tv即可。</li>
+</ul>
+
+<h3 id="3baseadapter适配器">3.BaseAdapter适配器</h3>
+
+<p>从上面的例子可以看出，ArrayAdapter一般适用于数据源数据种类比较单一的情形，若数据类型比较复杂，需要个性化定制布局，则可以采用BaseAdapter适配器进行数据适配。若要问BaseAdapter和SimpleAdapter有什么不同，通过API文档可以获悉，SimpleAdapter是BaseAdapter的子类，BaseAdapter较SimpleAdapter来讲更为灵活，在开发中也更为常用。 下面通过一个实例，来说明在开发中是如何使用BaseAdapter适配数据源的。</p>
+
+<p>首先对复杂的数据源进行数据封装：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Animal {
+    public Animal(String animal, int imgId) {
+        this.animal = animal;
+        this.imgId = imgId;
+    }
+    private String animal;
+    private int imgId;
+    public String getAnimal() {
+        return animal;
+    }
+    public void setAnimal(String animal) {
+        this.animal = animal;
+    }
+    public int getImgId() {
+        return imgId;
+    }
+    public void setImgId(int imgId) {
+        this.imgId = imgId;
+    }
+}
+</code></pre></div></div>
+
+<p>然后定义单个子项的布局：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="match_parent"&gt;
+    &lt;ImageView
+        android:id="@+id/img"
+        android:src="@mipmap/ic_launcher"
+        android:layout_width="50dp"
+        android:layout_height="50dp" /&gt;
+    &lt;TextView
+        android:id="@+id/tv"
+        android:text="hello"
+        android:gravity="center"
+        android:layout_marginLeft="50dp"
+        android:textSize="28sp"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp" /&gt;
+&lt;/LinearLayout&gt;
+</code></pre></div></div>
+
+<p>主布局文件和ArrayAdapter的主布局文件一样，就不再贴出代码，下面看一下自定义的适配器类，继承自BaseAdapter，如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class AnimalAdapter extends BaseAdapter {
+    private Context context;
+    private List&lt;Animal&gt; datas;
+    //构造函数需要传入两个必要的参数：上下文对象和数据源
+    public AnimalAdapter(Context context,List&lt;Animal&gt; datas) {
+        this.context=context;
+        this.datas=datas;
+    }
+    //返回子项的个数
+    @Override
+    public int getCount() {
+        return datas.size();
+    }
+    //返回子项对应的对象
+    @Override
+    public Object getItem(int position) {
+        return datas.get(position);
+    }
+    //返回子项的下标
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+    //返回子项视图
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        Animal animal= (Animal) getItem(position);
+        View view;
+        ViewHolder viewHolder;
+        if(convertView==null){
+            view = LayoutInflater.from(context).inflate(R.layout.animal_layout,null);
+            viewHolder=new ViewHolder();
+            viewHolder.animalImage=(ImageView)view.findViewById(R.id.img);
+            viewHolder.animalName=(TextView)view.findViewById(R.id.tv);
+            view.setTag(viewHolder);
+        }else{
+            view=convertView;
+            viewHolder= (ViewHolder) view.getTag();
+        }
+        viewHolder.animalName.setText(animal.getAnimal());
+        viewHolder.animalImage.setImageResource(animal.getImgId());
+        return view;
+    }
+    //创建ViewHolder类
+    class ViewHolder{
+        ImageView animalImage;
+        TextView animalName;
+    }
+}
+</code></pre></div></div>
+
+<p><strong>继承自BaseAdapter类，必须需要覆写四个方法，每个方法的具体含义已经在代码中做了注释。</strong>此外，为了提高加载效率，这里创建了内部类ViewHolder，可以避免每次调用getView方法时都要通过findViewById方法去实例化控件，大大提高运行效率，推荐以后开发中这么使用。 MainActivity.java代码如下：</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class MainActivity extends Activity {
+    private ListView listView;
+    private List&lt;Animal&gt; datas = new ArrayList&lt;Animal&gt;();
+    private AnimalAdapter animalAdapter;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//隐藏标题栏
+        setContentView(R.layout.activity_main);
+        initDatas();
+        listView = (ListView) findViewById(R.id.lv);
+        animalAdapter = new AnimalAdapter(this, datas);
+        listView.setAdapter(animalAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView&lt;?&gt; parent, View view, int position, long id) {
+                Toast.makeText(MainActivity.this, "您单击了" + datas.get(position).getAnimal(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    private void initDatas() {
+        Animal animal0 = new Animal("兔八哥", R.drawable.rabbit);
+        Animal animal1 = new Animal("眼镜蛇", R.drawable.snack);
+        Animal animal2 = new Animal("小金鱼", R.drawable.fish);
+        Animal animal3 = new Animal("千里马", R.drawable.horse);
+        Animal animal4 = new Animal("米老鼠", R.drawable.mouse);
+        Animal animal5 = new Animal("大国宝", R.drawable.panda);
+        datas.add(animal0);
+        datas.add(animal1);
+        datas.add(animal2);
+        datas.add(animal3);
+        datas.add(animal4);
+        datas.add(animal5);
+    }
+}
+</code></pre></div></div>
+
+<p>这里调用了setOnItemClickListener方法实现了单项监听，覆写了onItemClick方法，由参数positon通过List的getPosition方法获取对象，再通过对象封装的getAnimal方法可以获得对应的动物名，由Toast通知输出。</p>
+
+<p><a href="http://wiki.jikexueyuan.com/project/twenty-four-Scriptures/list-view.html">极客学院</a></p>
+
+:ET
