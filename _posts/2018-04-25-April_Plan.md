@@ -9,12 +9,10 @@ catalog: true
 tags:
 ---
 
-![Image]({{ site.url }}/img/文字基础知识0.png)
 
-![Image]({{ site.url }}/img/文字基础知识1.png)
+<img src="/img/文字基础知识0.png"/>
 
 <img src="/img/文字基础知识1.png"/>
-
 
 ```
 

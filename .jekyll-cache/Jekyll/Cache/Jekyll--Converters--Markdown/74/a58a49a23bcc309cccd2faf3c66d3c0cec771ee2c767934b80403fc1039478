@@ -1,4 +1,5 @@
-I"J<p><img src="http://starry99.github.io/catbook/img/falali2.jpg" alt="Image" /></p>
+I")<p><img src="/assets/postimg/falali2.jpg" /></p>
+
 <h4 id="一普通使用">一.普通使用</h4>
 <p>1.后台执行</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dispatch_async(dispatch_get_global_queue(0, 0), ^{

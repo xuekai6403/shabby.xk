@@ -10,8 +10,7 @@ tags:
 ---
 
 
-![]({{ site.url }}/img/android_apps.jpg)
-
+<img src="/assets/postimg/android_apps.jpg"/>
 
 
 >ListView是安卓最经典的控件之一，相当于IOS的UITableView，使用率非常之高。虽然现在其江山地位不稳，将要被recyclerview取代，但设计理念是很经典的。

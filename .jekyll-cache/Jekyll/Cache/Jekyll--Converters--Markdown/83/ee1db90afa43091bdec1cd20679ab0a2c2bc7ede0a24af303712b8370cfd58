@@ -1,18 +1,8 @@
----
-layout:     post
-title:      Vue成长记
-date:       2020-12-15
-author:     XueKai
-header-img:
-catalog: true
-tags:
----
+I"e<p><img src="/assets/postimg/IMG_4868.jpg" /></p>
 
-<img src="/assets/postimg20/IMG_4868.jpg"/>
+<p><br /></p>
 
-<br>
-
-<p align="right" style="font-size:16px;color:green">学习vue的第二周，昨天开始帮公司项目做一个管理系统的小功能，一个页面，两个接口。</p>
+<p align="right" style="font-size:16px;color:green">he学习vue的第二周，昨天开始帮公司项目做一个管理系统的小功能，一个页面，两个接口。</p>
 
 <p align="right" style="font-size:16px;color:green">把之前一个结构相似的页面拷过来，改了下路由和权限，可以从菜单跳转过来。</p>
 
@@ -32,39 +22,36 @@ tags:
 
 <p align="right" style="font-size:16px;color:green">林林总总，记录如上。</p>
 
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;el-table size="small" border fit highlight-current-row style="width: 100%" id="" :data="topData"&gt;
+      &lt;el-table-column prop="assetsQuantity" label="买入数量总和"/&gt;
+      &lt;el-table-column prop="buyAmount" label="买入金额总数" /&gt;
+      &lt;el-table-column prop="buyAvgPrice" label="整体买入均价" /&gt;
+      &lt;el-table-column prop="buyQuantity" label="持仓总数" /&gt;
+    &lt;/el-table&gt;
+    &lt;el-table size="small" border fit highlight-current-row style="width: 100%" id="" :data="topData"&gt;
+      &lt;el-table-column prop="sellAmount" label="卖出数量总和"&gt;&lt;/el-table-column&gt;
+      &lt;el-table-column prop="sellQuantity" label="卖出金额总数" /&gt;
+      &lt;el-table-column prop="sellAvgPrice" label="整体卖出均价" /&gt;
+      &lt;el-table-column prop="profitAndLoss" label="买卖盈亏" /&gt;
+    &lt;/el-table&gt;
+    &lt;el-table size="small" :data="list" v-loading="listLoading" border fit highlight-current-row
+      style="width: 100%" id="exportTab"&gt;
+      &lt;el-table-column type="index" label="序号" align="center" width="65"&gt;&lt;/el-table-column&gt;
+      &lt;el-table-column prop="userId" label="UID" /&gt;
+      &lt;el-table-column prop="symbol" label="交易对" /&gt;
+      &lt;el-table-column prop="assetsQuantity" label="持仓数量" /&gt;
+      &lt;el-table-column prop="buyQuantity" label="买入数量" /&gt;
+      &lt;el-table-column prop="buyAmount" label="买入金额" /&gt;
+      &lt;el-table-column prop="buyAvgPrice" label="买入均价" /&gt;
+      &lt;el-table-column prop="sellQuantity" label="卖出数量" /&gt;
+      &lt;el-table-column prop="sellAmount" label="卖出金额" /&gt;
+      &lt;el-table-column prop="sellAvgPrice" label="卖出均价" /&gt;
+      &lt;el-table-column prop="profitAndLoss" label="买卖盈亏" /&gt;
+    &lt;/el-table&gt;
 
-```
-<el-table size="small" border fit highlight-current-row style="width: 100%" id="" :data="topData">
-      <el-table-column prop="assetsQuantity" label="买入数量总和"/>
-      <el-table-column prop="buyAmount" label="买入金额总数" />
-      <el-table-column prop="buyAvgPrice" label="整体买入均价" />
-      <el-table-column prop="buyQuantity" label="持仓总数" />
-    </el-table>
-    <el-table size="small" border fit highlight-current-row style="width: 100%" id="" :data="topData">
-      <el-table-column prop="sellAmount" label="卖出数量总和"></el-table-column>
-      <el-table-column prop="sellQuantity" label="卖出金额总数" />
-      <el-table-column prop="sellAvgPrice" label="整体卖出均价" />
-      <el-table-column prop="profitAndLoss" label="买卖盈亏" />
-    </el-table>
-    <el-table size="small" :data="list" v-loading="listLoading" border fit highlight-current-row
-      style="width: 100%" id="exportTab">
-      <el-table-column type="index" label="序号" align="center" width="65"></el-table-column>
-      <el-table-column prop="userId" label="UID" />
-      <el-table-column prop="symbol" label="交易对" />
-      <el-table-column prop="assetsQuantity" label="持仓数量" />
-      <el-table-column prop="buyQuantity" label="买入数量" />
-      <el-table-column prop="buyAmount" label="买入金额" />
-      <el-table-column prop="buyAvgPrice" label="买入均价" />
-      <el-table-column prop="sellQuantity" label="卖出数量" />
-      <el-table-column prop="sellAmount" label="卖出金额" />
-      <el-table-column prop="sellAvgPrice" label="卖出均价" />
-      <el-table-column prop="profitAndLoss" label="买卖盈亏" />
-    </el-table>
+</code></pre></div></div>
 
-```
-
-```
-async getMarkets() {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>async getMarkets() {
       let res = await C.request.get(C.Api("getMarkets"), {
         page: 1,
         rows: 10000,
@@ -100,6 +87,6 @@ async getMarkets() {
       this.topData=[res];
     },
 
-```
+</code></pre></div></div>
 
-
+:ET

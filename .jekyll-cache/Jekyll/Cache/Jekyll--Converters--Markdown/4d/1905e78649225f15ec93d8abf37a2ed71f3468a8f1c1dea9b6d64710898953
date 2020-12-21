@@ -1,4 +1,5 @@
-I"�+<p><img src="http://starry99.github.io/catbook/img/falali.jpg" alt="Image" /></p>
+I"�+<p><img src="/assets/postimg/falali.jpg" /></p>
+
 <h3 id="1注释明晰">1.注释明晰</h3>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/** 来疯直播Session */
 @property (nonatomic, strong) LFLiveSession *session;

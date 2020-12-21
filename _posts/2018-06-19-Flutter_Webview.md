@@ -9,6 +9,8 @@ catalog: true
 tags:
 ---
 
+<img src="/assets/postimg20/IMG_4869.jpg"/>
+
 要想用Flutter做项目，Webveiw还是绕不过去的一个东西，现在大大小小的App众多详情和复杂布局，弱机器交互页面都会使用H5实现，今天就来简单总结一下Flutter中webvie的正确打开方式.
 
 [官方Document](https://pub.dartlang.org/packages/flutter_web_view)

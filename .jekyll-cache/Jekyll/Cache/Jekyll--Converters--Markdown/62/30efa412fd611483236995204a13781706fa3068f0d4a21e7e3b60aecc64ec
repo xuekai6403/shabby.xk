@@ -1,16 +1,6 @@
----
-layout:     post
-title:      写在Vue第一次体验
-date:       2020-12-10
-author:     XueKai
-header-img:
-catalog: true
-tags:
----
+I"<p><img src="/assets/postimg20/IMG_4871.jpg" /></p>
 
-<img src="/assets/postimg20/IMG_4871.jpg"/>
-
-<br>
+<p><br /></p>
 
 <p align="right" style="font-size:16px;color:green">写在Vue的第一次体验</p>
 
@@ -22,20 +12,19 @@ tags:
 
 <p align="right" style="font-size:16px;color:green">We set sail from here</p>
 
-```
-<template>
-    <div>
-      <h1 v-html="title"></h1>
-      <input type="text" v-model="itemNew" v-on:keyup.enter="addNew"/>
-      <ul>
-        <li v-for="(item,xkindex) in items" :key="xkindex">
-          <p>{{item.name}}</p>  <button @click="deteleIndex(xkindex)" class="btnn">删除</button>
-        </li>
-      </ul>
-    </div>
-</template>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+    &lt;div&gt;
+      &lt;h1 v-html="title"&gt;&lt;/h1&gt;
+      &lt;input type="text" v-model="itemNew" v-on:keyup.enter="addNew"/&gt;
+      &lt;ul&gt;
+        &lt;li v-for="(item,xkindex) in items" :key="xkindex"&gt;
+          &lt;p&gt;&lt;/p&gt;  &lt;button @click="deteleIndex(xkindex)" class="btnn"&gt;删除&lt;/button&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
 
-<script>
+&lt;script&gt;
 export default {
   name:'app',
   data(){
@@ -58,11 +47,12 @@ export default {
     }
   },
 }
-</script>
+&lt;/script&gt;
 
-<style scoped lang="less">
+&lt;style scoped lang="less"&gt;
   .btnn{background: red;}
-</style>
+&lt;/style&gt;
 
 
-```
+</code></pre></div></div>
+:ET
