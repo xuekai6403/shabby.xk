@@ -254,14 +254,16 @@ img {
 }
 
 .archive_date {
+    font-size: 0.9rem;
     text-transform: uppercase;
-
+    color: var(--archive_title);
     @include breakpoint(medium) {
         float: right;
     }
 }
 
 .archive_title {
+    font-size: 0.9rem;
     margin-top: 1.2rem;
     margin-bottom: 1.2rem;
     word-wrap: normal;
@@ -278,7 +280,7 @@ img {
 
 .archive_year {
     font-size: 1.2rem;
-    margin-top: 1.4rem;
+    margin-top: 1.6rem;
     margin-bottom: 0.6rem;
 }
 
@@ -325,8 +327,8 @@ img {
 .header_circle {
     border: none;
     box-sizing: border-box;
-    height: 7rem;
-    width: 7rem;
+    height: 6rem;
+    width: 6rem;
     border-radius: 50%;
 
     img {
@@ -449,7 +451,7 @@ img {
     }
 
     @include mobile-only {
-
+        margin-top: 50px;
         &:after {
             content: '/';
             color: var(--nav_font);
