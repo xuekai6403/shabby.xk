@@ -18,10 +18,10 @@ google_analytics: #UA—XXXXXXXX-X
 disqus_shortname: #disqus shortname
 
 user:
-  name: kbs
+  name: 夏目漱石
   pic: /assets/img/cat.jpg
   picAlt: "catbook"
-  job: kbs_ios_web
+  job: ソフトウェア開発エンジニア
   aboutme: true # comment this out if you don't need the 'about' page.
 
 exclude:

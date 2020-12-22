@@ -1,4 +1,4 @@
-<!-- each category page -->
+<!-- each category page 有类目-->
 {% if page.type %}
 <div class="archive">
   <p class="archive_type">{{ page.type }}</p>
@@ -6,9 +6,9 @@
     {% for post in site.categories[page.type] %}
     {% if post.url %}
     <li>
-        <time class='archive_date' datetime='{{ post.date | date_to_xmlschema }}'>
+        <!-- <time class='archive_date' datetime='{{ post.date | date_to_xmlschema }}'>
           {{ post.date | date: "%b %-d, %Y" }}
-        </time>
+        </time> -->
         <div class='archive_title'>
           <a href='{{ post.url | relative_url }}'>
             {{ post.title | escape }}
@@ -21,7 +21,7 @@
   </ul>
 </div>
 
-<!-- main page -->
+<!-- main page 无类目普通模式-->
 {% else %}
 <div class="archive">
   {% for post in site.posts %}
@@ -37,9 +37,9 @@
 
   <ul>
     <li>
-      <time class='archive_date' datetime='{{ post.date | date_to_xmlschema }}'>
+      <!-- <time class='archive_date' datetime='{{ post.date | date_to_xmlschema }}'>
         {{ post.date | date: "%b %d" }}
-      </time>
+      </time> -->
       <div class='archive_title'>
         <a href='{{ post.url | relative_url }}'>
           {{ post.title | escape }}

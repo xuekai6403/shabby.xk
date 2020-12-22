@@ -15,11 +15,11 @@
     --header_bg: #fafafa;
     --content_bg: #fff;
     --archive_font: #000;
-    --archive_title: #46a891;
-    --archive_title_hover: #87CDBD;
+    --archive_title: #4FA7EC;
+    --archive_title_hover: #6EBEFA;
     --name_font: #FFAA00;
     --job_font: #003845;
-    --nav_font: #8d7edc;
+    --nav_font: #4FA7EC;
     --nav_font_hover: #D4CEF2;
     --shadow_color: rgba(160, 160, 160, 0.05);
     --post_title: #003845;
@@ -41,11 +41,11 @@
     --header_bg: #24292E;
     --content_bg: #2F3437;
     --archive_font: #CACCCE;
-    --archive_title: #46a891;
-    --archive_title_hover: #87CDBD;
+    --archive_title: #4FA7EC;
+    --archive_title_hover: #6EBEFA    ;
     --name_font: #FFAA00;
     --job_font: #CACCCE;
-    --nav_font: #8d7edc;
+    --nav_font: #4FA7EC;
     --nav_font_hover: #D4CEF2;
     --shadow_color: rgba(0, 0, 0, 1);
     --post_title: #46a891;
@@ -327,8 +327,8 @@ img {
 .header_circle {
     border: none;
     box-sizing: border-box;
-    height: 6rem;
-    width: 6rem;
+    height: 7rem;
+    width: 7rem;
     border-radius: 50%;
 
     img {
@@ -357,7 +357,7 @@ img {
 
 .header_job {
     display: block;
-    margin-top: .5rem;
+    margin-top: 1.2rem;
     color: var(--job_font);
     font-size: 0.75em;
     font-weight: 700;
@@ -418,7 +418,7 @@ img {
 }
 
 .nav {
-    margin-top: 5rem;
+    margin-top: 4rem;
 
     @include mobile-only {
         display: none;
@@ -426,7 +426,7 @@ img {
 }
 
 .nav_list {
-    margin: 0;
+    margin-top: 3rem;
     padding: 0;
     list-style: none;
 
