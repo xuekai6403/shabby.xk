@@ -1,0 +1,108 @@
+I"N<p><img src="/assets/postimg20/IMG_4922.jpg" /></p>
+
+<p><br /></p>
+
+<p align="right" style="font-size:18px;color:green">vue</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;template&gt;
+    &lt;div class="tableview"&gt;
+			&lt;van-notice-bar scrollable text="技术是开发它的人的共同灵魂。" class="notice" /&gt;
+		&lt;div class="listBox"&gt;
+			&lt;van-list 
+			v-model="loading" 
+			:finished="finished" 
+			finished-text="没有更多了"
+			@load="onLoad" class="vanlist"&gt;
+				&lt;div v-for="item in list" :key="item" class="ContentCell"&gt;
+					&lt;div class="nameLB"&gt;&lt;/div&gt;
+					&lt;div class="ageLB"&gt;&lt;/div&gt;
+				&lt;/div&gt;
+			&lt;/van-list&gt;
+		&lt;/div&gt;
+        &lt;div class="botView"&gt;
+			&lt;van-nav-bar
+				title="标题"
+				left-text="返回"
+				right-text="按钮"
+				@click-left="onClickLeft"
+				@click-right="onClickRight"
+			/&gt;
+			&lt;van-tabs v-model="active"&gt;
+				&lt;van-tab title="雷霆"&gt;俄克拉荷马&lt;/van-tab&gt;
+				&lt;van-tab title="勇士"&gt;旧金山&lt;/van-tab&gt;
+				&lt;van-tab title="火箭"&gt;休斯顿&lt;/van-tab&gt;
+				&lt;van-tab title="湖人"&gt;洛杉矶&lt;/van-tab&gt;
+			&lt;/van-tabs&gt;
+			&lt;van-grid :column-num="3"&gt;
+				&lt;van-grid-item icon="photo-o" text="周琦" /&gt;
+				&lt;van-grid-item icon="photo-o" text="蔡徐坤" /&gt;
+				&lt;van-grid-item icon="photo-o" text="周杰伦" /&gt;
+				&lt;van-grid-item icon="photo-o" text="PGone" /&gt;
+				&lt;van-grid-item icon="photo-o" text="小阿giao" /&gt;
+			&lt;/van-grid&gt;
+        &lt;/div&gt;
+		&lt;van-tabbar v-model="active"&gt;
+				&lt;van-tabbar-item icon="home-o"&gt;首页&lt;/van-tabbar-item&gt;
+				&lt;van-tabbar-item icon="search"&gt;矿机&lt;/van-tabbar-item&gt;
+				&lt;van-tabbar-item icon="friends-o"&gt;交易&lt;/van-tabbar-item&gt;
+				&lt;van-tabbar-item icon="setting-o"&gt;我的&lt;/van-tabbar-item&gt;
+			&lt;/van-tabbar&gt;
+    &lt;/div&gt;
+&lt;/template&gt;
+</code></pre></div></div>
+
+<p align="right" style="font-size:18px;color:green">style</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;style scoped&gt;
+.tableview{
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+.notice{
+    height: 25px;
+	background-color: rgb(254, 251, 234);
+	margin-left: -10px;
+	margin-right: -10px;
+	margin-top: 20px;
+}
+.listBox{
+	width:100%;
+	height: 150px;
+	overflow: hidden;
+	overflow-Y: scroll;
+	background-color: rgb(151, 209, 206);
+	border-radius: 5px;
+	margin-top: 10px;
+}
+.botView{
+    width: 100%;
+    height: 200px;
+	border-radius: 5px;
+	margin-top: 10px;
+}
+.ContentCell{
+    display: flex;
+    height: 35px;
+    align-items: center;
+    justify-content: space-between;
+}
+.nameLB{
+    font-size: 11px;
+    margin-left: 5px;
+    color: salmon;
+    width: 90px;
+    height: 20px;
+}
+.ageLB{
+    font-size: 13px;
+    margin-right: 10px;
+}
+&lt;/style&gt;
+</code></pre></div></div>
+
+<p align="right" style="font-size:18px;color:green">调试效果</p>
+
+<p><img src="/assets/postimg20/WX20201223.png" /></p>
+:ET
