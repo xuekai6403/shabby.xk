@@ -1,0 +1,97 @@
+I"�<p><img src="/assets/postimg20/sass.png" /></p>
+
+<p>【1.变量】</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+$boxWidth: 680px;
+
+//转化CSS
+
+.body {
+     width: $boxWidth;
+}
+
+</code></pre></div></div>
+
+<p>【2.嵌套】</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>nav {
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+//转化CSS
+
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+</code></pre></div></div>
+
+<p>【3.@import和Partials】</p>
+
+<p>【4.混入：@mixin和@include】</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+@mixin mixin-name {
+  color: red;
+  font-size: 25px;
+  font-weight: bold;
+  border: 1px solid blue;
+}
+
+selector {
+  @include mixin-name;
+}
+
+//转化CSS
+
+.danger {
+  color: red;
+  font-size: 25px;
+  font-weight: bold;
+  border: 1px solid blue;
+  background-color: green;
+}
+
+</code></pre></div></div>
+
+<p>【5.继承：@extend】</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+.button-basic  {
+  border: none;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-report  {
+  @extend .button-basic;
+  background-color: red;
+}
+
+//转化CSS
+
+.button-basic, .button-report {
+  border: none;
+  padding: 15px 30px;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button-report  {
+  background-color: red;
+}
+
+</code></pre></div></div>
+
+<p>【6.Sass函数】</p>
+:ET
